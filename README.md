@@ -92,3 +92,38 @@ for(;;){
 }
 ```
 ---------------------------------------------
+  
+  **Creating Semaphores**
+  
+  **Components**
+  
+  MQX-Lite
+  
+  In main
+  ```java
+   _lwsem_create(&MySem1, 1);
+  ```
+  In mqx_tasks.c
+  ```java
+  extern LWSEM_STRUCT MySem1; // get semaphore from main.c
+  
+  void Task1_task(uint32_t task_init_data){
+
+	// Wait for the ISR to post the semaphore
+	_lwsem_wait(&MySem1);
+
+	while(1){
+		
+		// Code what you need here
+		
+		 // say that this semaphore is ready (for other tasks)
+		_lwsem_post(&MySem1);
+		
+		// 250ms by doing this it allows resources to be used in other tasks
+		_time_delay_ticks(50);
+
+       }
+   }
+  ```
+  
+  ------------------------------------------
