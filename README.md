@@ -22,6 +22,8 @@ Slave address - 0x1D <br>
 **components** 
 
 term
+
+char c;
 ```java
 if(Term1_KeyPressed()){Term1_ReadChar(&c);}
 ```
