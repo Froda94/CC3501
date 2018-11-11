@@ -1,14 +1,21 @@
 # Just Your Typical Github Readme 
 
 
-**USER IMPORTS FOR EVERY FILE**
+**PINS**
 
-#include <stdio.h><br>
-#include <stdbool.h><br>
-#include <string.h><br>
-#include <stdbool.h><br>
-#include <stdlib.h><br>
-#include <stdio.h><br>
+red-   PTC3
+green- PTD4
+blue-  PTA2
+Light Sensor - ADC0_DM0
+
+
+**I2C ACCELLEROMETER SETTINGS**
+frequency - 10MHz
+010
+011
+SCL 93.6kHz  - Pin = PTB0
+SDA 1.61 us  - Pin = PTB1
+Slave address - 0x1D
 
 **Sending Char Array Over Serial**
 
@@ -53,20 +60,16 @@ Term
   Term
   
 ```java
-word adc = 0;
-byte temp;
-byte light;
-AD1_Calibrate(1);
+uint16 val[2];
+AD1_Calibrate(TRUE);
 
 for(;;){
-  AD1_Measure(1);
-  AD1_GetChanValue(0, &temp); // 0,1 depends on what order it is set in the channel settings
-  AD1_GetChanValue(1, &light);
-  Term1_SendStr("temperature: ");
-  Term1_SendNum(temp);
-  Term1_SendStr("Light: ");
-  Term1_SendNum(light);
-
+  AD1_Measure(TRUE);
+  AD1_GetValue16(val)
+  Term1_SendStr("temperature: "\r\n);
+  Term1_SendNum(val[0]);
+  Term1_SendStr("Light: "\r\n);
+  Term1_SendNum(val[1]);
 }
 ```
 
