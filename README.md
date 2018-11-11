@@ -159,7 +159,7 @@ void Task3_task(uint32_t task_init_data){
   **Components**
 
   Nil
-  
+ ```java 
   // Define the states
   typedef enum {
 	NSFlowing,
@@ -206,3 +206,4 @@ void Task3_task(uint32_t task_init_data){
 		state = chooseNewState(state);
 	}
   
+```
