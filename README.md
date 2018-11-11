@@ -10,11 +10,21 @@ Light Sensor - ADC0_DM0
 
 
 **I2C ACCELLEROMETER SETTINGS**
+
 frequency - 10MHz <br>
 010 and 011 <br>
 SCL 93.6kHz  - Pin = PTB0 <br>
 SDA 1.61 us  - Pin = PTB1 <br>
 Slave address - 0x1D <br>
+
+**CheckingIf Button Has Been Pressed**
+
+**components** 
+
+term
+'''java
+if(Term1_KeyPressed()){Term1_ReadChar(&c);}
+'''
 
 **Sending Char Array Over Serial**
 
@@ -141,4 +151,57 @@ void Task3_task(uint32_t task_init_data){
 }
   ```
   
-  ------------------------------------------
+------------------------------------------
+
+  **Creating Semaphores**
+  
+  **Components**
+
+  Nil
+  
+  // Define the states
+  typedef enum {
+	NSFlowing,
+	NSStopping,
+	NSStopped,
+	WEStopping,
+	MAX_STATE_T // keep this label at the end of the enum. Its numeric value indicates the number of legal states.
+  } state_t;
+  
+  const bool outputs[4][8] = {
+	//red,yellow,green,red,yellow,green,walk,stop
+	{ false, false, true, true, false, false, false, false }, // NSFlowing
+	{ false, true, false, true, false, false, false, false }, // NSStopping
+	{ true, false, false, false, false, true, false, false}, // NSStopped
+	{ true, false, false, false, true, false, false, false}, // WEStopping
+	{ true, false, false, true, false, false, false, false} // Pedestrians
+	};
+	
+  state_t chooseNewState(state_t state) {
+  	// This function is called when we first enter a state.
+  	// Reset a timer so we can measure the time spent in this state (to handle timeout events)
+	  FC321_Reset();
+	  
+  	// Loop until we change state
+  	for (;;) {	
+
+  		switch (state) {
+			case NSFlowing:
+				if (c == 'q') { // checking if pressure pad is pressed
+					c = 'p';
+					return NSStopping; // go into amber state
+				}
+				break;
+  		}
+  	}
+  }
+  
+  	state_t state = NSFlowing; // Set initial state as NSFlowing
+	for (;;) {
+		// We just entered this state. Therefore set the new outputs.
+		set_lights(outputs[state]);
+
+		// Run the state transition function to decide the next state
+		state = chooseNewState(state);
+	}
+  
