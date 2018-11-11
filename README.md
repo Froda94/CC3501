@@ -17,15 +17,16 @@ SCL 93.6kHz  - Pin = PTB0 <br>
 SDA 1.61 us  - Pin = PTB1 <br>
 Slave address - 0x1D <br>
 
-**CheckingIf Button Has Been Pressed**
+**Checking If Button Has Been Pressed**
 
 **components** 
 
 term
-'''java
+```java
 if(Term1_KeyPressed()){Term1_ReadChar(&c);}
-'''
+```
 
+---------------------------------------------
 **Sending Char Array Over Serial**
 
 **Components**
