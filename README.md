@@ -97,7 +97,7 @@ for(;;){
   
   **Components**
   
-  MQX-Lite
+  MQX-Lite -> In settings, choose how many tasks you need
   
   In main
   ```java
@@ -124,6 +124,19 @@ for(;;){
 
        }
    }
+   
+// Task 3 prints data
+void Task3_task(uint32_t task_init_data){
+	while(1) {
+
+		_lwsem_wait(&MySem1); // waits until Sem1 posts, then does code underneath
+		_lwsem_wait(&MySem2);
+	
+		// wite code here
+		
+		_time_delay_ticks(50);
+	}
+}
   ```
   
   ------------------------------------------
