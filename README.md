@@ -3,16 +3,15 @@
 
 **PINS**
 
-red-   PTC3
-green- PTD4
-blue-  PTA2
+red-   PTC3 <br>
+green- PTD4 <br>
+blue-  PTA2 <br>
 Light Sensor - ADC0_DM0
 
 
 **I2C ACCELLEROMETER SETTINGS**
 frequency - 10MHz <br>
-010 <br>
-011 <br>
+010 and 011 <br>
 SCL 93.6kHz  - Pin = PTB0 <br>
 SDA 1.61 us  - Pin = PTB1 <br>
 Slave address - 0x1D <br>
