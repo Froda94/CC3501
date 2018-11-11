@@ -10,12 +10,12 @@ Light Sensor - ADC0_DM0
 
 
 **I2C ACCELLEROMETER SETTINGS**
-frequency - 10MHz
-010
-011
-SCL 93.6kHz  - Pin = PTB0
-SDA 1.61 us  - Pin = PTB1
-Slave address - 0x1D
+frequency - 10MHz <br>
+010 <br>
+011 <br>
+SCL 93.6kHz  - Pin = PTB0 <br>
+SDA 1.61 us  - Pin = PTB1 <br>
+Slave address - 0x1D <br>
 
 **Sending Char Array Over Serial**
 
